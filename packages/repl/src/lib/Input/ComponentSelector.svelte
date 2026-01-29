@@ -1,11 +1,9 @@
 <script lang="ts">
-	import RunesInfo from './RunesInfo.svelte';
 	import type { Workspace, File } from '../Workspace.svelte';
 	import { tick } from 'svelte';
 	import { Checkbox, Toolbox } from '@sveltejs/site-kit/components';
 
 	interface Props {
-		runes: boolean;
 		onchange: () => void;
 		workspace: Workspace;
 		can_migrate: boolean;
@@ -13,7 +11,7 @@
 		download?: () => void;
 	}
 
-	let { runes, onchange, workspace, can_migrate, migrate, download }: Props = $props();
+	let { onchange, workspace, can_migrate, migrate, download }: Props = $props();
 
 	let input = $state() as HTMLInputElement;
 
@@ -165,7 +163,6 @@
 	>
 
 	<div class="runes">
-		<RunesInfo {runes} />
 		<Toolbox>
 			<label class="option">
 				<span>Toggle Vim mode</span>

@@ -202,10 +202,6 @@
 		}
 	});
 
-	let runes = $derived(
-		workspace.current.name.endsWith('.svelte.js') ||
-			(workspace.current_compiled?.result?.metadata.runes ?? false)
-	);
 
 	let migration = $derived(workspace.current_compiled?.migration);
 	let can_migrate = $derived(migration ? migration.code !== workspace.current?.contents : false);
@@ -235,7 +231,7 @@
 		>
 			{#snippet a()}
 				<section>
-					<ComponentSelector {runes} {onchange} {workspace} {can_migrate} {migrate} {download} />
+					<ComponentSelector {onchange} {workspace} {can_migrate} {migrate} {download} />
 
 					<Editor {workspace} />
 				</section>
