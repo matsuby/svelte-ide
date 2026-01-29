@@ -2,7 +2,7 @@
 	import { browser } from '$app/environment';
 	import { afterNavigate, replaceState } from '$app/navigation';
 	import { Repl } from '@sveltejs/repl';
-	import { mapbox_setup } from '../../../../../config.js';
+	import { mapbox_setup } from '../../../../config.js';
 	import { page } from '$app/state';
 	import { decode_and_decompress_text } from '../gzip.js';
 	import type { File } from '@sveltejs/repl/workspace';
@@ -50,7 +50,7 @@
 		set_files();
 	});
 
-	const relaxed = $derived(data.gist.relaxed || (data.user && data.user.id === data.gist.owner));
+	const relaxed = true;
 </script>
 
 <svelte:head>

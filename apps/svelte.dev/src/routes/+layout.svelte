@@ -20,7 +20,7 @@
 	<meta name="og:image" content="https://svelte.dev/images/twitter-thumbnail.jpg" />
 </svelte:head>
 
-<Shell nav_visible={page.route.id !== '/(authed)/playground/[id]/embed'}>
+<Shell nav_visible={page.route.id !== '/playground/[id]/embed'}>
 
 
 	{#snippet children()}

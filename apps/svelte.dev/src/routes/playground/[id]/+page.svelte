@@ -2,10 +2,9 @@
 	// @ts-expect-error no types
 	import * as doNotZip from 'do-not-zip';
 	import { browser } from '$app/environment';
-	import { afterNavigate, goto, replaceState } from '$app/navigation';
-	import type { Gist } from '$lib/db/types';
+	import { afterNavigate, replaceState } from '$app/navigation';
 	import { Repl } from '@sveltejs/repl';
-	import { mapbox_setup } from '../../../../config.js';
+	import { mapbox_setup } from '../../../config.js';
 	import AppControls from './AppControls.svelte';
 	import { compress_and_encode_text, decode_and_decompress_text } from './gzip.js';
 	import { page } from '$app/state';
@@ -84,17 +83,6 @@
 		}
 	}
 
-	function handle_fork({ gist }: { gist: Gist }) {
-		goto(`/playground/${gist.id}?version=${version}`);
-	}
-
-	function handle_save() {
-		// Hide hash from URL
-		const hash = location.hash.slice(1);
-		if (hash) {
-			set_hash();
-		}
-	}
 
 	async function download() {
 		const { files: components, imports } = repl.toJSON();
@@ -171,7 +159,7 @@
 		}
 	}
 
-	const relaxed = $derived(data.gist.relaxed || (data.user && data.user.id === data.gist.owner));
+	const relaxed = true;
 </script>
 
 <svelte:head>
@@ -204,10 +192,6 @@
 <div class="repl-outer">
 	<AppControls
 		examples={data.examples}
-		user={data.user}
-		gist={data.gist}
-		forked={handle_fork}
-		saved={handle_save}
 		{repl}
 		bind:name
 		bind:modified
