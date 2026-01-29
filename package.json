@@ -19,6 +19,7 @@
 		"format": "pnpm -r format",
 		"test": "pnpm -r test",
 		"build": "cd ./packages/site-kit && pnpm package && cd ../repl && pnpm package && cd ../../apps/svelte.dev && pnpm build",
+		"dev": "pnpm --filter svelte.dev dev",
 		"changeset:version": "changeset version && pnpm -r generate:version && git add --all",
 		"changeset:publish": "changeset publish"
 	},
