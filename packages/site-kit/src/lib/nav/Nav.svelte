@@ -7,14 +7,12 @@ Top navigation bar for the application. It provides a slot for the left side, th
 	import { search } from '../state/search.svelte';
 	import Icon from '../components/Icon.svelte';
 	import { page } from '$app/state';
-	import ThemeToggle from '../components/ThemeToggle.svelte';
 	import MobileMenu from './MobileMenu.svelte';
 	import type { NavigationLink } from '../types';
 	import Dropdown from '../components/Dropdown.svelte';
 	import { HoverMenu } from '../components';
 	import Search from '../search/Search.svelte';
 	import { tick } from 'svelte';
-	import FontToggle from '../components/FontToggle.svelte';
 
 	interface Props {
 		home_title?: string;
@@ -137,10 +135,6 @@ Top navigation bar for the application. It provides a slot for the left side, th
 					<span data-icon="github"></span>
 				</a>
 			</div>
-
-			<FontToggle />
-
-			<ThemeToggle />
 		</div>
 	</div>
 
@@ -154,10 +148,6 @@ Top navigation bar for the application. It provides a slot for the left side, th
 		>
 			<Icon name="search" size={18} />
 		</button>
-
-		<FontToggle />
-
-		<ThemeToggle />
 
 		<button
 			bind:this={menu_button}

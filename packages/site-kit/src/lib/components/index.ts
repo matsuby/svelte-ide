@@ -1,4 +1,3 @@
-export { default as Banner } from './Banner.svelte';
 export { default as Checkbox } from './Checkbox.svelte';
 export { default as Dropdown } from './Dropdown.svelte';
 export { default as HoverMenu } from './HoverMenu.svelte';
@@ -8,5 +7,4 @@ export { default as ScreenToggle } from './ScreenToggle.svelte';
 export { default as Section } from './Section.svelte';
 export { default as Shell } from './Shell.svelte';
 export { default as Text } from './Text.svelte';
-export { default as ThemeToggle } from './ThemeToggle.svelte';
 export { default as Toolbox } from './Toolbox.svelte';

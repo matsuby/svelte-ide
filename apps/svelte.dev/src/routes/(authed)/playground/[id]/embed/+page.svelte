@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { afterNavigate, replaceState } from '$app/navigation';
-	import { theme } from '@sveltejs/site-kit/state';
 	import { Repl } from '@sveltejs/repl';
 	import { mapbox_setup } from '../../../../../config.js';
 	import { page } from '$app/state';
@@ -70,7 +69,7 @@
 			{relaxed}
 			can_escape
 			injectedJS={mapbox_setup}
-			previewTheme={theme.current}
+			previewTheme={"light" /* TODO: get from user preference */}
 			embedded={page.url.searchParams.has('output-only') ? 'output-only' : true}
 			onversion={(v) => {
 				if (version === v) return;
