@@ -89,9 +89,6 @@ importers:
       icons:
         specifier: workspace:*
         version: link:../../packages/icons
-      logos:
-        specifier: workspace:*
-        version: link:../../packages/logos
       port-authority:
         specifier: ^2.0.1
         version: 2.0.1
@@ -209,8 +206,6 @@ importers:
         version: 8.0.0(rollup@4.46.4)
 
   packages/icons: {}
-
-  packages/logos: {}
 
   packages/repl:
     dependencies:
