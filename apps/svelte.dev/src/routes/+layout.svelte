@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '@sveltejs/site-kit/styles/index.css';
-	import { dev } from '$app/environment';
 	import { Shell } from '@sveltejs/site-kit/components';
 
 	let { children: layout_children } = $props();
