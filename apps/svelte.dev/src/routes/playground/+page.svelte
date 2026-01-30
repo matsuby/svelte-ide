@@ -2,7 +2,6 @@
 	// @ts-expect-error no types
 	import * as doNotZip from 'do-not-zip';
 	import { browser } from '$app/environment';
-	import { afterNavigate } from '$app/navigation';
 	import { Repl } from '@sveltejs/repl';
 	import { mapbox_setup } from '../../config.js';
 	import AppControls from './AppControls.svelte';

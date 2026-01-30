@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import ModalDropdown from '$lib/components/ModalDropdown.svelte';
 	import SecondaryNav from '$lib/components/SecondaryNav.svelte';
 	import type { Repl } from '@sveltejs/repl';
