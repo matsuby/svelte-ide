@@ -82,7 +82,6 @@
 		"./codemirror": {
 			"default": "./src/lib/codemirror/index.js"
 		},
-		"./branding/svelte-logo.svg": "./src/lib/branding/svelte-logo.svg",
 		"./components": {
 			"default": "./src/lib/components/index.ts",
 			"svelte": "./src/lib/components/index.ts"
