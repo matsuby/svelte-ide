@@ -12,11 +12,6 @@ export type CompilerCommand =
 			id: number;
 			type: 'compile';
 			payload: CompilerInput;
-	  }
-	| {
-			id: number;
-			type: 'migrate';
-			payload: MigrateInput;
 	  };
 
 export interface CompilerInput {
@@ -36,17 +31,6 @@ export interface CompilerOutput {
 	metadata?: {
 		runes: boolean;
 	};
-}
-
-export interface MigrateInput {
-	source: string;
-}
-
-export interface MigrateOutput {
-	result: {
-		code: string;
-	};
-	error?: string;
 }
 
 export interface BundleOptions {

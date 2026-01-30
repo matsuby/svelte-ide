@@ -33,21 +33,10 @@ addEventListener('message', async (event) => {
 			filename: file.name,
 			payload: {
 				error: null,
-				result: null,
-				migration: null
+				result: null
 			}
 		});
 		return;
-	}
-
-	let migration = null;
-
-	if (svelte.migrate) {
-		try {
-			migration = svelte.migrate(file.contents, { filename: file.name });
-		} catch (e) {
-			// can this happen?
-		}
 	}
 
 	try {
@@ -108,8 +97,7 @@ addEventListener('message', async (event) => {
 						delete w.toString;
 						return { message: w.message, ...w };
 					})
-				},
-				migration
+				}
 			}
 		});
 	} catch (e) {
@@ -125,8 +113,7 @@ addEventListener('message', async (event) => {
 			filename: file.name,
 			payload: {
 				error: { message: e.message, ...e },
-				result: null,
-				migration: null
+				result: null
 			}
 		});
 	}

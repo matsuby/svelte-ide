@@ -122,14 +122,6 @@
 		});
 	}
 
-	async function migrate() {
-		if (!can_migrate) return; // belt and braces — button is already disabled
-
-		workspace.update_file({
-			...workspace.current!,
-			contents: migration!.code
-		});
-	}
 
 	let width = $state(0);
 	let show_output = $state(false);
@@ -204,8 +196,6 @@
 	});
 
 
-	let migration = $derived(workspace.current_compiled?.migration);
-	let can_migrate = $derived(migration ? migration.code !== workspace.current?.contents : false);
 </script>
 
 <svelte:window onbeforeunload={before_unload} />
@@ -239,7 +229,7 @@
 
 			{#snippet b()}
 				<section>
-					<ReplControls {workspace} {can_migrate} {migrate} {download} />
+					<ReplControls {workspace} {download} />
 					<Output
 						status={status_visible ? status : null}
 						{embedded}

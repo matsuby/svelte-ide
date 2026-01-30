@@ -34,9 +34,6 @@ export type Item = File | Directory;
 export interface Compiled {
 	error: CompileError | null;
 	result: CompileResult | null;
-	migration: {
-		code: string;
-	} | null;
 }
 
 function is_file(item: Item): item is File {
