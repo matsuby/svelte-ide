@@ -31,6 +31,8 @@
 		 * Invoked whenever there's a bundler or runtime error
 		 */
 		onerror?: (error: Error) => void;
+		examples?: Array<{ title: string; examples: any[] }>;
+		onselect?: (slug: string) => void;
 	}
 
 	let {
@@ -47,7 +49,9 @@
 		onversion,
 		onchange = () => {},
 		download,
-		onerror
+		onerror,
+		examples = [],
+		onselect
 	}: Props = $props();
 
 	// TODO pass in real data
@@ -219,7 +223,7 @@
 
 			{#snippet b()}
 				<section>
-					<ReplControls {workspace} {download} />
+					<ReplControls {workspace} {download} {examples} {onselect} />
 					<Output
 						status={status_visible ? status : null}
 						{embedded}

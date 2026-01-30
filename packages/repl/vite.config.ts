@@ -4,10 +4,10 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [sveltekit()],
 	ssr: {
-		noExternal: ['@sveltejs/site-kit', '@sveltejs/repl']
+		noExternal: []
 	},
 	optimizeDeps: {
-		exclude: ['@sveltejs/site-kit', '@sveltejs/repl', '@rollup/browser']
+		exclude: ['@rollup/browser']
 	},
 	server: {
 		fs: { allow: ['../../packages'] },

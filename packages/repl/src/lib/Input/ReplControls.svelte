@@ -1,16 +1,23 @@
 <script lang="ts">
 	import type { Workspace } from '../Workspace.svelte';
 	import { Checkbox, Toolbox } from '../components';
+	import TemplateSelector from './TemplateSelector.svelte';
 
 	interface Props {
 		workspace: Workspace;
 		download?: () => void;
+		examples?: Array<{ title: string; examples: any[] }>;
+		onselect?: (slug: string) => void;
 	}
 
-	let { workspace, download }: Props = $props();
+	let { workspace, download, examples = [], onselect }: Props = $props();
 </script>
 
 <div class="controls">
+	{#if examples.length > 0 && onselect}
+		<TemplateSelector {examples} {onselect} />
+	{/if}
+
 	<Toolbox>
 		<label class="option">
 			<span>Toggle Tailwind</span>

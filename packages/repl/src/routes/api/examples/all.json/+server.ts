@@ -1,5 +1,6 @@
-import { read } from '$app/server';
-import { examples } from '$lib/server/content';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { examples } from '../../../../lib/server/examples.js';
 import { json } from '@sveltejs/kit';
 
 export type Examples = Array<{
@@ -21,7 +22,11 @@ async function munge(files: Record<string, string>) {
 		let name = file.slice(0, dot);
 		let type = file.slice(dot + 1);
 
-		result.push({ name, type, source: await read(source).text() });
+		const resolved = source.startsWith('/')
+			? path.resolve(process.cwd(), source.slice(1))
+			: path.resolve(process.cwd(), source);
+
+		result.push({ name, type, source: await fs.readFile(resolved, 'utf-8') });
 	}
 
 	result.sort((a, b) => {
@@ -36,11 +41,6 @@ async function munge(files: Record<string, string>) {
 	return result;
 }
 
-// TODO move this into examples.json once we have fixed this SvelteKit bug:
-// [id].json/+server.ts contained a fetch to examples.json, but it did not turn up here and instead recursed to itself.
-
-// Examples are prerendered to avoid making FS requests at runtime,
-// things needing the examples data will need to go through this endpoint
 export async function GET() {
 	return json(
 		(await Promise.all(
