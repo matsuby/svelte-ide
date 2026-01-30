@@ -7,7 +7,7 @@
 	interface Props {
 		status: string | null;
 		runtimeError?: Error | null;
-		embedded?: boolean | 'output-only';
+		embedded?: boolean;
 		relaxed?: boolean;
 		can_escape?: boolean;
 		injectedJS: string;
@@ -43,7 +43,7 @@
 			{can_escape}
 			{injectedJS}
 			{injectedCSS}
-			onLog={embedded === 'output-only' ? () => {} : undefined}
+			onLog={undefined}
 			theme={previewTheme}
 		/>
 	</div>

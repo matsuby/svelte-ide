@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SplitPane } from '@rich_harris/svelte-split-pane';
-	import { ScreenToggle } from '@sveltejs/site-kit/components';
+	import { ScreenToggle } from './components';
 	import { BROWSER } from 'esm-env';
 	import { writable } from 'svelte/store';
 	import Bundler from './Bundler.svelte.js';
@@ -11,10 +11,11 @@
 	import { Workspace, type File } from './Workspace.svelte.js';
 	import Editor from './Editor/Editor.svelte';
 	import type { ReplContext } from './types.js';
+	import './styles/index.css';
 
 	interface Props {
 		svelteVersion?: string;
-		embedded?: boolean | 'output-only';
+		embedded?: boolean;
 		orientation?: 'columns' | 'rows';
 		relaxed?: boolean;
 		can_escape?: boolean;
@@ -82,13 +83,13 @@
 		};
 	}
 
-	// Our own playground / v0 need this
+	// Our own playground needs this
 	export async function set(data: {
 		files: File[];
 		tailwind?: boolean;
 		aliases?: Record<string, string>;
 	}) {
-		// Await promise so that users (v0 in this case) can know when the bundling is done
+		// Await promise so that users can know when the bundling is done
 		await workspace.reset(
 			data.files,
 			{ tailwind: data.tailwind ?? false, aliases: data.aliases },
@@ -96,15 +97,6 @@
 		);
 	}
 
-	// v0 needs this
-	export function get_asts() {
-		return Object.fromEntries(
-			Object.entries(workspace.compiled).map(([name, compiled]) => [
-				name,
-				compiled.result?.ast ?? null
-			])
-		);
-	}
 
 	// TODO get rid
 	export function markSaved() {
@@ -180,7 +172,7 @@
 	let mobile = $derived(width < 540);
 
 	$effect(() => {
-		$toggleable = mobile && orientation === 'columns' && embedded !== 'output-only';
+		$toggleable = mobile && orientation === 'columns' && !embedded;
 	});
 
 	$effect(() => {
@@ -201,7 +193,7 @@
 <svelte:window onbeforeunload={before_unload} />
 
 <div
-	class="container {embedded === 'output-only' ? '' : 'container-normal'}"
+	class="container container-normal"
 	class:embedded
 	class:toggleable={$toggleable}
 	bind:clientWidth={width}
@@ -210,14 +202,12 @@
 		<SplitPane
 			id="main"
 			type={orientation === 'rows' ? 'vertical' : 'horizontal'}
-			pos="{embedded === 'output-only'
-				? 0
-				: mobile || fixed
+			pos="{mobile || fixed
 					? fixedPos
 					: orientation === 'rows'
 						? 60
 						: 50}%"
-			min={embedded === 'output-only' ? '0px' : '100px'}
+			min="100px"
 			max="-4.1rem"
 		>
 			{#snippet a()}

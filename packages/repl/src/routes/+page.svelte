@@ -1,13 +1,7 @@
-<script>
-	import V0 from './v0.svelte';
-</script>
-
-<V0 />
-
-<!-- <script lang="ts">
+<script lang="ts">
 	import Repl from '$lib/Repl.svelte';
 	import { onMount } from 'svelte';
-	import '@sveltejs/site-kit/styles/index.css';
+	import '../lib/styles/index.css';
 
 	let repl: ReturnType<typeof Repl>;
 
@@ -41,4 +35,4 @@
 	main {
 		height: 100vh;
 	}
-</style> -->
+</style>
