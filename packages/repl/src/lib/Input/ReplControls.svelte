@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Workspace } from '../Workspace.svelte';
-	import { Checkbox, Toolbox } from '@sveltejs/site-kit/components';
+	import { Checkbox, Toolbox } from '../components';
 
 	interface Props {
 		workspace: Workspace;

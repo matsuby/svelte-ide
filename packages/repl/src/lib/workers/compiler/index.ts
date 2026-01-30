@@ -1,4 +1,3 @@
-import '@sveltejs/site-kit/polyfills';
 import type { CompileResult } from 'svelte/compiler';
 import type { ExposedCompilerOptions, File } from '../../Workspace.svelte';
 import { load_svelte } from '../npm';

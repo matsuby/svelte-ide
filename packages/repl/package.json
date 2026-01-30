@@ -69,7 +69,12 @@
 		"publint": "^0.2.12",
 		"svelte-check": "^4.3.1",
 		"typescript": "^5.5.4",
-		"vite": "^7.0.4"
+		"vite": "^7.0.4",
+		"@fontsource/atkinson-hyperlegible": "^5.1.0",
+		"@fontsource/dm-serif-display": "^5.1.0",
+		"@fontsource/eb-garamond": "^5.1.0",
+		"@fontsource/fira-mono": "^5.1.0",
+		"@fontsource/fira-sans": "^5.1.0"
 	},
 	"type": "module",
 	"dependencies": {
@@ -91,13 +96,11 @@
 		"@rich_harris/svelte-split-pane": "^2.0.0",
 		"@rollup/browser": "^4.44.2",
 		"@sveltejs/acorn-typescript": "^1.0.5",
-		"@sveltejs/site-kit": "workspace:*",
 		"@sveltejs/svelte-json-tree": "^2.2.1",
 		"acorn": "^8.11.3",
 		"codemirror": "^6.0.1",
 		"esm-env": "^1.0.0",
 		"esrap": "^2.1.0",
-		"icons": "workspace:*",
 		"locate-character": "^3.0.0",
 		"magic-string": "^0.30.0",
 		"marked": "^14.1.2",

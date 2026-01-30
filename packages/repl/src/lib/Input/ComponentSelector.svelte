@@ -216,7 +216,7 @@
 			position: absolute;
 			left: 0em;
 			top: 0;
-			background: url(icons/file) 50% 50% no-repeat;
+			background: url(../icons/file.svg) 50% 50% no-repeat;
 			background-size: 1em;
 		}
 
@@ -281,7 +281,7 @@
 
 		.icon {
 			background: currentColor;
-			mask: url(icons/file-new) 50% 50% no-repeat;
+			mask: url(../icons/file-new.svg) 50% 50% no-repeat;
 			mask-size: 1.2em;
 		}
 	}

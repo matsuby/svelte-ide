@@ -1,4 +1,3 @@
-import '@sveltejs/site-kit/polyfills';
 import { walk } from 'zimmerframe';
 import '../patch_window';
 import { rollup } from '@rollup/browser';
