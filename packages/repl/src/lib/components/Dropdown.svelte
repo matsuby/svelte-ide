@@ -4,14 +4,22 @@
 	let {
 		children,
 		dropdown,
-		align = 'left'
-	}: { children: Snippet; dropdown: Snippet; align?: 'left' | 'right' } = $props();
+		align = 'left',
+		active = $bindable(false)
+	}: {
+		children: Snippet;
+		dropdown: Snippet;
+		align?: 'left' | 'right';
+		active?: boolean;
+	} = $props();
 </script>
 
 <div class="dropdown">
-	{@render children()}
+	<button onmouseenter={() => active = true} onmouseleave={() => active = false}>
+		{@render children()}
+	</button>
 
-	<nav class="dropdown-content" class:align-right={align === 'right'}>
+	<nav class="dropdown-content" class:align-right={align === 'right'} class:active>
 		{@render dropdown()}
 	</nav>
 </div>
@@ -19,8 +27,7 @@
 <style>
 	.dropdown {
 		position: relative;
-		display: inline-block;
-		height: 100%;
+		display: grid;
 	}
 
 	.dropdown-content {
@@ -38,6 +45,7 @@
 		transform: var(--safari-fix);
 		-webkit-transform: var(--safari-fix);
 		will-change: opacity;
+		overflow: scroll;
 
 		&.align-right {
 			left: auto;
@@ -46,7 +54,8 @@
 	}
 
 	.dropdown:hover .dropdown-content,
-	.dropdown:focus-within .dropdown-content {
+	.dropdown:focus-within .dropdown-content,
+	.dropdown-content.active {
 		opacity: 1;
 		pointer-events: all;
 	}
