@@ -5,6 +5,7 @@
 	import { writable } from 'svelte/store';
 	import Bundler from './Bundler.svelte.js';
 	import ComponentSelector from './Input/ComponentSelector.svelte';
+	import ReplControls from './Input/ReplControls.svelte';
 	import Output from './Output/Output.svelte';
 	import { set_repl_context } from './context.js';
 	import { Workspace, type File } from './Workspace.svelte.js';
@@ -231,14 +232,14 @@
 		>
 			{#snippet a()}
 				<section>
-					<ComponentSelector {onchange} {workspace} {can_migrate} {migrate} {download} />
-
+					<ComponentSelector {onchange} {workspace} />
 					<Editor {workspace} />
 				</section>
 			{/snippet}
 
 			{#snippet b()}
 				<section>
+					<ReplControls {workspace} {can_migrate} {migrate} {download} />
 					<Output
 						status={status_visible ? status : null}
 						{embedded}
