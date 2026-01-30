@@ -2,11 +2,6 @@
 	import '@sveltejs/site-kit/styles/index.css';
 	import { dev } from '$app/environment';
 	import { Shell } from '@sveltejs/site-kit/components';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-	import { inject } from '@vercel/analytics';
-
-	injectSpeedInsights();
-	inject({ mode: dev ? 'development' : 'production' });
 
 	let { children: layout_children } = $props();
 </script>
