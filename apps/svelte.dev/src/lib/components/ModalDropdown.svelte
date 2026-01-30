@@ -5,19 +5,21 @@
 	import { Icon } from '@sveltejs/site-kit/components';
 	import type { Snippet } from 'svelte';
 
-	let { children, label }: { children: Snippet; label: string } = $props();
-
-	let open = $state(false);
+	let {
+		children,
+		label,
+		active = $bindable(false)
+	}: { children: Snippet; label: string; active?: boolean } = $props();
 
 	afterNavigate(() => {
-		open = false;
+		active = false;
 	});
 </script>
 
 <svelte:window
 	onkeydown={(e) => {
 		if (e.key === 'Escape') {
-			open = false;
+			active = false;
 		}
 	}}
 />
@@ -25,7 +27,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <details
 	class="examples-select"
-	bind:open
+	bind:open={active}
 	ontogglecapture={(e) => {
 		const details = e.target as HTMLDetailsElement;
 
