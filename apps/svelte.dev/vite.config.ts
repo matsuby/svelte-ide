@@ -6,31 +6,6 @@ import browserslist from 'browserslist';
 
 const plugins: PluginOption[] = [
 	enhancedImages(),
-	// apply cross-origin isolation headers for tutorial when developing/previewing locally,
-	// else web containers don't work and images don't load in the rollup iframe
-	{
-		name: 'cross-origin-isolation-for-preview',
-		configurePreviewServer: (server) => {
-			server.middlewares.use((req, res, next) => {
-				if (req.url?.startsWith('/tutorial/kit')) {
-					res.setHeader('cross-origin-opener-policy', 'same-origin');
-					res.setHeader('cross-origin-embedder-policy', 'require-corp');
-					res.setHeader('cross-origin-resource-policy', 'cross-origin');
-				}
-				next();
-			});
-		},
-		configureServer: (server) => {
-			server.middlewares.use((req, res, next) => {
-				if (req.url?.startsWith('/tutorial/kit')) {
-					res.setHeader('cross-origin-opener-policy', 'same-origin');
-					res.setHeader('cross-origin-embedder-policy', 'require-corp');
-					res.setHeader('cross-origin-resource-policy', 'cross-origin');
-				}
-				next();
-			});
-		}
-	},
 	sveltekit() as PluginOption
 ];
 
@@ -75,13 +50,7 @@ const config: UserConfig = {
 		}
 	},
 	server: {
-		fs: { allow: ['../../packages', '../../../KIT/kit/packages/kit'] },
-		// for SvelteKit tutorial
-		headers: {
-			'cross-origin-opener-policy': 'same-origin',
-			'cross-origin-embedder-policy': 'require-corp',
-			'cross-origin-resource-policy': 'cross-origin'
-		}
+		fs: { allow: ['../../packages', '../../../KIT/kit/packages/kit'] }
 	},
 	optimizeDeps: {
 		exclude: ['@sveltejs/site-kit', '@sveltejs/repl', '@rollup/browser']

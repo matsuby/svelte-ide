@@ -34,11 +34,23 @@
 
 <style>
 	.controls {
+		position: relative;
 		display: flex;
         justify-content: flex-end;
 		align-items: center;
-		padding: 0 1rem 0 0;
+		padding: 0 1rem;
 		height: 100%;
+
+		/* fake border (allows tab borders to appear above it) */
+		&::before {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			bottom: 0px;
+			left: 0;
+			background-color: var(--sk-border);
+		}
 	}
 
 	.option {
