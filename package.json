@@ -14,12 +14,12 @@
 		"url": "git+https://github.com/sveltejs/svelte.dev.git"
 	},
 	"scripts": {
-		"check": "pnpm -r check",
-		"lint": "pnpm -r lint",
-		"format": "pnpm -r format",
-		"test": "pnpm -r test",
-		"build": "cd ./packages/site-kit && pnpm package && cd ../repl && pnpm package && cd ../../apps/svelte.dev && pnpm build",
-		"dev": "pnpm --filter svelte.dev dev",
+		"check": "pnpm --filter @sveltejs/repl check",
+		"lint": "pnpm --filter @sveltejs/repl lint",
+		"format": "pnpm --filter @sveltejs/repl format",
+		"test": "pnpm --filter @sveltejs/repl test",
+		"build": "pnpm --filter @sveltejs/repl build",
+		"dev": "pnpm --filter @sveltejs/repl dev",
 		"changeset:version": "changeset version && pnpm -r generate:version && git add --all",
 		"changeset:publish": "changeset publish"
 	},
