@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { marked } from 'marked';
-	import PaneWithPanel from './PaneWithPanel.svelte';
 	import Viewer from './Viewer.svelte';
-	import { Workspace, type File } from '../Workspace.svelte';
+	import { Workspace } from '../Workspace.svelte';
 
 	interface Props {
 		status: string | null;
 		runtimeError?: Error | null;
-		embedded?: boolean;
 		relaxed?: boolean;
 		can_escape?: boolean;
 		injectedJS: string;
@@ -19,7 +17,6 @@
 	let {
 		status,
 		runtimeError = $bindable(null),
-		embedded = false,
 		relaxed = false,
 		can_escape = false,
 		injectedJS,

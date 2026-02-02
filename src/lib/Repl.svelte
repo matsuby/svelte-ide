@@ -226,7 +226,6 @@
 					<ReplControls {workspace} {download} {examples} {onselect} />
 					<Output
 						status={status_visible ? status : null}
-						{embedded}
 						{relaxed}
 						{can_escape}
 						{injectedJS}
