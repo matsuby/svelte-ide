@@ -1,8 +1,6 @@
-# needed in addition to package ignores due to https://github.com/prettier/prettier-vscode/issues/3424
-node_modules
 .svelte-kit
-dist
+/dist
+node_modules
 pnpm-lock.yaml
-.vercel
-_generated.md
-/apps/svelte.dev/content/docs
+package-lock.json
+yarn.lock
