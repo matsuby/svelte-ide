@@ -205,7 +205,7 @@
 	<div class="viewport" class:output={show_output}>
 		<SplitPane
 			id="main"
-			type={orientation === 'rows' ? 'vertical' : 'horizontal'}
+			type={orientation === 'rows' ? 'rows' : 'columns'}
 			pos="{mobile || fixed
 					? fixedPos
 					: orientation === 'rows'

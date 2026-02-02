@@ -75,7 +75,7 @@ const highlight_field = StateField.define<DecorationSet>({
 });
 
 const tab_behaviour = new Compartment();
-const vim_mode = new Compartment();
+
 
 const default_extensions = [
 	basicSetup,
@@ -83,7 +83,7 @@ const default_extensions = [
 	tab_behaviour.of(keymap.of([{ key: 'Tab', run: acceptCompletion }])),
 	indentUnit.of('\t'),
 	theme,
-	vim_mode.of([]),
+
 	highlight_field
 ];
 
@@ -113,7 +113,7 @@ export class Workspace {
 	#readonly = false; // TODO do we need workspaces for readonly stuff?
 	#files = $state.raw<Item[]>([]);
 	#current = $state.raw() as File;
-	#vim = $state(false);
+
 	#aliases = $state.raw(undefined) as undefined | Record<string, string>;
 	#tailwind = $state(false);
 
@@ -288,7 +288,6 @@ export class Workspace {
 
 		untrack(() => {
 			view.setState(this.#get_state(untrack(() => this.#current)));
-			this.vim = localStorage.getItem('vim') === 'true';
 		});
 	}
 
@@ -511,43 +510,7 @@ export class Workspace {
 		}
 	}
 
-	get vim() {
-		return this.#vim;
-	}
 
-	set vim(value) {
-		this.#toggle_vim(value);
-	}
-
-	async #toggle_vim(value: boolean) {
-		this.#vim = value;
-
-		localStorage.setItem('vim', String(value));
-
-		// @ts-ignore jfc CodeMirror is a struggle
-		let vim_extension_index = default_extensions.findIndex((ext) => ext.compartment === vim_mode);
-
-		let extension: any = [];
-
-		if (value) {
-			const { vim } = await import('@replit/codemirror-vim');
-			extension = vim();
-		}
-
-		default_extensions[vim_extension_index] = vim_mode.of(extension);
-
-		this.#view?.dispatch({
-			effects: vim_mode.reconfigure(extension)
-		});
-
-		// update all the other states
-		for (const file of this.#files) {
-			if (file.type !== 'file') continue;
-			if (file === this.#current) continue;
-
-			this.states.set(file.name, this.#create_state(file));
-		}
-	}
 
 	#create_directories(item: Item) {
 		// create intermediate directories as necessary
