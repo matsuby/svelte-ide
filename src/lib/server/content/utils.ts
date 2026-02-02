@@ -1,18 +1,4 @@
-import { Marked, type Renderer, type TokenizerObject, type MarkedExtension } from 'marked';
 import json5 from 'json5';
-
-export const SHIKI_LANGUAGE_MAP = {
-	bash: 'bash',
-	env: 'bash',
-	html: 'svelte',
-	svelte: 'svelte',
-	sv: 'svelte',
-	js: 'javascript',
-	dts: 'typescript',
-	css: 'css',
-	ts: 'typescript',
-	'': ''
-};
 
 export function is_in_code_block(body: string, index: number) {
 	const code_blocks = [...body.matchAll(/(`{3,}).*\n(.|\n)+?\1/gm)].map((match) => {
@@ -28,7 +14,7 @@ export function is_in_code_block(body: string, index: number) {
 /**
  * Strip styling/links etc from markdown
  */
-export function clean(markdown: string) {
+function clean(markdown: string) {
 	return markdown
 		.replace(/(?:^|b)\*\*(.+?)\*\*(?:\b|$)/g, '$1') // bold
 		.replace(/(?:^|b)_(.+?)_(?:\b|$)/g, '$1') // Italics
@@ -78,35 +64,6 @@ export function smart_quotes(
 			return (before ?? '') + replacement + (after ?? '');
 		}
 	);
-}
-
-const tokenizer: TokenizerObject = {
-	url(src) {
-		// if `src` is a package version string, eg: adapter-auto@1.2.3
-		// do not tokenize it as email
-		if (/@\d+\.\d+\.\d+/.test(src)) {
-			return undefined;
-		}
-		// else, use the default tokenizer behavior
-		return false;
-	}
-};
-
-export async function transform(
-	markdown: string,
-	{
-		walkTokens,
-		...renderer
-	}: Partial<Renderer> & { walkTokens?: MarkedExtension['walkTokens'] } = {}
-) {
-	const marked = new Marked({
-		async: true,
-		renderer,
-		tokenizer,
-		walkTokens
-	});
-
-	return (await marked.parse(markdown)) ?? '';
 }
 
 export function extract_frontmatter(markdown: string) {

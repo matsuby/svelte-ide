@@ -41,3 +41,16 @@ export type ReplContext = {
 	workspace: Workspace;
 	svelteVersion: string;
 };
+
+export type Document = {
+	slug: string;
+	file: string;
+	metadata: { title: string; [key: string]: any };
+	breadcrumbs: Array<{ title: string }>;
+	body: string;
+	sections: Array<{ slug: string; title: string }>;
+	children: Document[];
+	prev: null | { slug: string; title: string };
+	next: null | { slug: string; title: string };
+	assets?: Record<string, string>;
+};

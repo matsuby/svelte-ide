@@ -1,4 +1,4 @@
-import { extract_frontmatter, is_in_code_block, slugify, smart_quotes } from '../../markdown/utils';
+import { extract_frontmatter, is_in_code_block, slugify, smart_quotes } from './utils';
 import type { Document } from '../../types';
 
 export async function create_index(
