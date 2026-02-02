@@ -2,7 +2,7 @@
 	import * as doNotZip from 'do-not-zip';
 	import { browser } from '$app/environment';
 	import { page } from '$app/state';
-	import { onMount, setContext } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import Repl from '../lib/Repl.svelte';
 	import { save_project, load_project, type ProjectState } from '../lib/storage';
 	import type { File } from '../lib/Workspace.svelte.js';
@@ -11,8 +11,7 @@
 	let { data } = $props();
 
 	let repl = $state() as ReturnType<typeof Repl>;
-	let name = $state(data.default_gist.name);
-	let modified = $state(false);
+	let name = $state(untrack(() => data.default_project.name));
 
 	let version = $derived(page.url.searchParams.get('version') || 'latest');
 
@@ -36,7 +35,7 @@
 		if (project) {
 			restore_project(project);
 		} else {
-			load_files_from_gist(data.default_gist);
+			load_project_files(data.default_project);
 		}
 	}
 
@@ -52,16 +51,14 @@
 			})),
 			tailwind: project.tailwind
 		});
-		modified = false;
 	}
 
-	function load_files_from_gist(gist: any) {
-		name = gist.name;
+	function load_project_files(project: any) {
+		name = project.name;
 		repl.set({
-			files: JSON.parse(JSON.stringify(gist.components)).map(munge),
+			files: JSON.parse(JSON.stringify(project.components)).map(munge),
 			tailwind: false
 		});
-		modified = false;
 		save();
 	}
 
@@ -69,8 +66,8 @@
 		try {
 			const res = await fetch(`/api/${slug}.json`);
 			if (res.ok) {
-				const gist = await res.json();
-				load_files_from_gist(gist);
+				const project = await res.json();
+				load_project_files(project);
 			} else {
 				alert('Failed to load example');
 			}
@@ -97,12 +94,12 @@
 				files: storage_files,
 				tailwind
 			});
-			modified = false;
+
 		}, 500);
 	}
 
 	function onchange() {
-		modified = true;
+
 		save();
 	}
 

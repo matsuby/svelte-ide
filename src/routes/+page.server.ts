@@ -10,10 +10,10 @@ export async function load({ fetch }) {
 		error(res.status as any);
 	}
 
-	const [default_gist, examples] = await Promise.all([res.json(), examples_res as Promise<Examples>]);
+	const [default_project, examples] = await Promise.all([res.json(), examples_res as Promise<Examples>]);
 
 	return {
-		default_gist,
+		default_project,
 		examples: examples
 			.filter((section) => !section.title.includes('Embeds'))
 			.map((section) => ({
